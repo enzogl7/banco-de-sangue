@@ -1,0 +1,35 @@
+/* ANIMACOES */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        padding: 20px;
+    }
+}
+
+/* ELEMENTOS */
+h1 {
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+.texto-json {
+    font-family: "Courier New", Courier, monospace;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.texto-json:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

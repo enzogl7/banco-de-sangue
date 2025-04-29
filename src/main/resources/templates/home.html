@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/links :: headContent('/assets/css/home.css')}"></head>
+<meta charset="UTF-8">
+<title>Banco de Sangue - Processamento de dados</title>
+
+<body class="bg-light">
+<div class="container mt-5 fade-in">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-12 col-lg-8 col-xl-8">
+            <h1 class="text-center mb-2">Banco de Sangue</h1>
+            <p class="text-center">Seja bem-vindo! Para realizar a coleta de dados, cole o JSON no campo abaixo ou envie o arquivo diretamente, e clique em "Processar dados".</p>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="card shadow rounded">
+                        <div class="card-body">
+                            <h5 class="card-title text-center mb-4">
+                                Processar Dados de Candidatos
+                                <span class="ml-2">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="infoDropdown"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Ver detalhes do processamento">
+                                        <i class="bi bi-info-circle"></i>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-left p-3 shadow-sm" aria-labelledby="infoDropdown" style="max-width: 500px;">
+                                        <h6 class="dropdown-header font-weight-bold">Informações extraídas:</h6>
+                                        <ul class="mb-2 pl-3 pr-2 small">
+                                            <li>Quantidade de candidatos por estado do Brasil.</li>
+                                            <li>IMC médio por faixa etária (de 10 em 10 anos).</li>
+                                            <li>Percentual de obesidade entre homens e mulheres (IMC &gt; 30).</li>
+                                            <li>Média de idade por tipo sanguíneo.</li>
+                                            <li>Possíveis doadores por tipo sanguíneo receptor.</li>
+                                        </ul>
+                                        <div class="alert alert-info mb-0 p-2 small" role="alert">
+                                            <strong>Observação:</strong> Apenas pessoas com idade entre <strong>16 e 69 anos</strong> e peso acima de <strong>50 kg</strong> podem doar sangue.
+                                        </div>
+                                    </div>
+                                </span>
+                            </h5>
+
+                            <form th:action="@{/processar}" method="post" enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="jsonInput" class="p">Cole o JSON com os dados dos candidatos:</label>
+                                    <textarea id="jsonInput" name="json" class="form-control texto-json" rows="8" placeholder="Cole aqui o JSON" required></textarea>
+                                </div>
+
+                                <div class="form-group mt-3">
+                                    <label for="jsonFile" class="p">Ou envie um arquivo JSON:</label>
+                                    <div class="custom-file">
+                                        <input type="file" id="jsonFile" name="jsonFile" class="custom-file-input" accept=".json">
+                                        <label class="custom-file-label" for="jsonFile">Escolher arquivo</label>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-block mt-3">Processar Dados</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="results-box mt-5">
+                <h4>Resultados:</h4>
+                <div th:if="${resultado}">
+                    <pre th:text="${resultado}"></pre>
+                </div>
+            </div> !-->
+        </div>
+    </div>
+</div>
+
+<footer th:replace="~{fragments/scripts :: scriptsContent('/assets/js/home.js')}"></footer>
+</body>
+</html>
