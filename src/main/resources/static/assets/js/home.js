@@ -87,6 +87,7 @@ function enviarJson() {
             montarGraficoQtdeDoadoresPorTipoSanguineo(response.doadoresPorTipoSanguineo);
         },
         error: function(xhr, status, error) {
+            $("#loadingOverlay").hide();
             Swal.fire({
                 icon: "error",
                 title: "Erro!",

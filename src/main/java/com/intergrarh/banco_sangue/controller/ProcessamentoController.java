@@ -37,27 +37,28 @@ public class ProcessamentoController {
                 jsonData = json;
             }
             if (jsonData != null) {
-                System.out.println("JSON Recebido");
+
+                ObjectMapper objectMapper = new ObjectMapper();
+                JsonNode rootNode = objectMapper.readTree(jsonData);
+                List<Candidato> candidatos = candidatoService.extrairCandidatos(rootNode);
+
+                Map<String, Integer> candidatosPorEstado = candidatoService.calcularCandidatosPorEstado(candidatos);
+                Map<String, Double> imcMedioPorFaixaEtaria = candidatoService.calcularImcMedioPorFaixaEtaria(candidatos);
+                Map<String, Double> percentualObesosPorSexo = candidatoService.calcularPercentualObesosPorSexo(candidatos);
+                Map<String, Integer> mediaIdadePorTipoSanguineo = candidatoService.calcularMediaIdadePorTipoSanguineo(candidatos);
+                Map<String, Integer> doadoresPorTipoSanguineo = candidatoService.calcularDoadoresPorTipoSanguineo(candidatos, tipoSanguineoService.findAll());
+
+                Map<String, Object> jsonResultado = new LinkedHashMap<>();
+                jsonResultado.put("candidatosPorEstado", candidatosPorEstado);
+                jsonResultado.put("imcMedioPorFaixaEtaria", imcMedioPorFaixaEtaria);
+                jsonResultado.put("percentualObesosPorSexo", percentualObesosPorSexo);
+                jsonResultado.put("mediaIdadePorTipoSanguineo", mediaIdadePorTipoSanguineo);
+                jsonResultado.put("doadoresPorTipoSanguineo", doadoresPorTipoSanguineo);
+                return ResponseEntity.ok(jsonResultado);
             }
 
-            ObjectMapper objectMapper = new ObjectMapper();
-            JsonNode rootNode = objectMapper.readTree(jsonData);
-            List<Candidato> candidatos = candidatoService.extrairCandidatos(rootNode);
+            return ResponseEntity.badRequest().build();
 
-            Map<String, Integer> candidatosPorEstado = candidatoService.calcularCandidatosPorEstado(candidatos);
-            Map<String, Double> imcMedioPorFaixaEtaria = candidatoService.calcularImcMedioPorFaixaEtaria(candidatos);
-            Map<String, Double> percentualObesosPorSexo = candidatoService.calcularPercentualObesosPorSexo(candidatos);
-            Map<String, Integer> mediaIdadePorTipoSanguineo = candidatoService.calcularMediaIdadePorTipoSanguineo(candidatos);
-            Map<String, Integer> doadoresPorTipoSanguineo = candidatoService.calcularDoadoresPorTipoSanguineo(candidatos, tipoSanguineoService.findAll());
-
-            Map<String, Object> jsonResultado = new LinkedHashMap<>();
-            jsonResultado.put("candidatosPorEstado", candidatosPorEstado);
-            jsonResultado.put("imcMedioPorFaixaEtaria", imcMedioPorFaixaEtaria);
-            jsonResultado.put("percentualObesosPorSexo", percentualObesosPorSexo);
-            jsonResultado.put("mediaIdadePorTipoSanguineo", mediaIdadePorTipoSanguineo);
-            jsonResultado.put("doadoresPorTipoSanguineo", doadoresPorTipoSanguineo);
-
-        return ResponseEntity.ok(jsonResultado);
     }
 
 }
