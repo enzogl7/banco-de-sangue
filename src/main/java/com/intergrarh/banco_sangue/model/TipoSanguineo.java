@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.util.Set;
 
-@Entity(name = "tipo_sanguineo")
+@Entity(name = "tipos_sanguineos")
 @Table(name = "tipos_sanguineos")
 @Getter
 @Setter
