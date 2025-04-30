@@ -25,7 +25,7 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 - Bootstrap 4.6
 - JavaScript + jQuery
 - Chart.js (gráficos)
-- SweetAlert2 (alertas bonitos)
+- SweetAlert2 (alertas)
 - Thymeleaf (uso de fragments para importação de scripts e links css)
 
 ---
@@ -43,22 +43,29 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 | `SENHA_BANCO`         | Senha do banco                          | `123`                     | `suaSenhaSegura`                |
 ---
 ### ℹ️ Passo a passo
-#### 🔽 1. Definir variáveis de ambiente (substitua por suas respectivas credenciais/nomes)
-🪟 Windows (PowerShell):
+#### 🔽 1. Criar a database no Postgres
+Certifique-se de criar uma database no PgAdmin com o nome de sua preferência antes de tentar subir o projeto.
+
+---
+#### 🔽 2. Definir variáveis de ambiente (substitua por suas respectivas credenciais/nomes)
+🪟 Windows PowerShell:
 ```
 [Environment]::SetEnvironmentVariable("URL_BANCO", "jdbc:postgresql://localhost:5432/nome_banco", "User")
-[Environment]::SetEnvironmentVariable("USER_BANCO", "user", "User")
-[Environment]::SetEnvironmentVariable("SENHA_BANCO", "senha", "User")
+[Environment]::SetEnvironmentVariable("USER_BANCO", "user-postgres", "User")
+[Environment]::SetEnvironmentVariable("SENHA_BANCO", "senha-postgres", "User")
 ```
 ---
-#### 🔽 2. Clonar o repositório
+#### 🔽 3. Clonar o repositório
 ```
 git clone https://github.com/enzogl7/banco-de-sangue.git
 cd banco-de-sangue
 ```
-#### 🔽 3. Rodar a aplicação
+---
+#### 🔽 4. Rodar a aplicação
 ```mvn spring-boot:run```
 
-*A aplicação estará disponível em: localhost:8080/home
+##### *A aplicação estará disponível em: localhost:8080/home
 
+---
+###### enzolima527@gmail.com
 
