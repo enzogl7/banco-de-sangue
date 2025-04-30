@@ -13,6 +13,18 @@ $('.custom-file-input').on('change', function (e) {
 $(function () {
     $('[data-toggle="tooltip"]').tooltip()
 })
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 100) {
+        $('#btnVoltarTopo').fadeIn();
+    } else {
+        $('#btnVoltarTopo').fadeOut();
+    }
+});
+
+$('#btnVoltarTopo').click(function() {
+    $('html, body').animate({scrollTop: 0}, 800);
+    return false;
+});
 
 // FUNCOES
 function habilitarInputs() {
