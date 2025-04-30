@@ -66,7 +66,7 @@ git clone https://github.com/enzogl7/banco-de-sangue.git
 cd banco-de-sangue
 ```
 #### 🔽 3. Rodar a aplicação
-```./mvnw spring-boot:run```
+```mvn spring-boot:run```
 
 *A aplicação estará disponível em: localhost:8080/home
 
