@@ -31,7 +31,7 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 ---
 ## 💡 Como rodar o projeto localmente?
 ### ✅ Pré-requisitos
-- Java 17+
+- Java JDK 17+
 - Maven
 - Git
 - PostgreSQL
