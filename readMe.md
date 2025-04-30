@@ -35,7 +35,7 @@ O projeto está hospedado no Render e pode ser acessado através do seguinte lin
 
 [https://banco-de-sangue.onrender.com/home](https://banco-de-sangue.onrender.com/home)
 
-*OBS.: Por estar hospedado em um servidor gratuito do Render, a aplicação pode apresentar um pouco de lentidão.
+*OBS.: Por estar hospedado em um servidor gratuito do Render, a aplicação pode apresentar um pouco de lentidão e/ou loading ao entrar no link, mas basta aguardar alguns segundos ;).
 
 ---
 ## 💡 Como rodar o projeto localmente?
