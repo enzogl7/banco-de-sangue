@@ -2,6 +2,7 @@ package com.intergrarh.banco_sangue.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.intergrarh.banco_sangue.model.Candidato;
+import com.intergrarh.banco_sangue.model.TipoSanguineo;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -9,10 +10,16 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CandidatoService {
     private final DecimalFormat formato = new DecimalFormat("#.##", new DecimalFormatSymbols(Locale.ENGLISH));
+    private final TipoSanguineoService tipoSanguineoService;
+
+    public CandidatoService(TipoSanguineoService tipoSanguineoService) {
+        this.tipoSanguineoService = tipoSanguineoService;
+    }
 
     private int calcularIdade(String dataNasc) {
         String[] partesData = dataNasc.split("/");
@@ -99,36 +106,42 @@ public class CandidatoService {
         return percentualObesosPorSexo;
     }
 
-    public Map<String, Double> calcularMediaIdadePorTipoSanguineo(List<Candidato> candidatos) {
+    public Map<String, Integer> calcularMediaIdadePorTipoSanguineo(List<Candidato> candidatos) {
         Map<String, List<Integer>> idadesPorTipoSanguineo = new HashMap<>();
         for (Candidato candidato : candidatos) {
             int idade = calcularIdade(candidato.getDataNasc());
             idadesPorTipoSanguineo.computeIfAbsent(candidato.getTipoSanguineo(), k -> new ArrayList<>()).add(idade);
         }
 
-        Map<String, Double> mediaIdadePorTipoSanguineo = new HashMap<>();
+        Map<String, Integer> mediaIdadePorTipoSanguineo = new HashMap<>();
         for (Map.Entry<String, List<Integer>> entry : idadesPorTipoSanguineo.entrySet()) {
             double somaIdades = 0;
             for (int idade : entry.getValue()) {
                 somaIdades += idade;
             }
-            double valorfinal =  somaIdades / entry.getValue().size();
-            mediaIdadePorTipoSanguineo.put(entry.getKey(), Double.valueOf(formato.format(valorfinal)));
+            Integer valorfinal = (int) (somaIdades / entry.getValue().size());
+            mediaIdadePorTipoSanguineo.put(entry.getKey(), valorfinal);
         }
 
         return mediaIdadePorTipoSanguineo;
     }
 
-    public Map<String, Integer> calcularDoadoresPorTipoSanguineo(List<Candidato> candidatos) {
+    public Map<String, Integer> calcularDoadoresPorTipoSanguineo(List<Candidato> candidatos, List<TipoSanguineo> tiposSanguineos) {
         Map<String, Integer> doadoresPorTipoSanguineo = new HashMap<>();
+        Map<String, Long> tipoSanguineoIds = tiposSanguineos.stream().collect(Collectors.toMap(TipoSanguineo::getTipo, TipoSanguineo::getId));
 
         for (Candidato candidato : candidatos) {
             int idade = calcularIdade(candidato.getDataNasc());
             double peso = candidato.getPeso();
-
+            String tipoSanguineo = candidato.getTipoSanguineo();
             if (idade >= 16 && idade <= 69 && peso > 50) {
-                String tipoSanguineo = candidato.getTipoSanguineo();
-                doadoresPorTipoSanguineo.put(tipoSanguineo, doadoresPorTipoSanguineo.getOrDefault(tipoSanguineo, 0) + 1);
+                TipoSanguineo tipoCandidato = tipoSanguineoService.findByTipo(tipoSanguineo).orElseThrow(null);
+                Set<TipoSanguineo> tiposQueCandidatoPodeDoarPara = tipoCandidato.getPodeDoarPara();
+
+                for (TipoSanguineo tipoReceptor : tiposQueCandidatoPodeDoarPara) {
+                    String tipoReceptorString = tipoReceptor.getTipo();
+                    doadoresPorTipoSanguineo.put(tipoReceptorString, doadoresPorTipoSanguineo.getOrDefault(tipoReceptorString, 0) + 1);
+                }
             }
         }
 

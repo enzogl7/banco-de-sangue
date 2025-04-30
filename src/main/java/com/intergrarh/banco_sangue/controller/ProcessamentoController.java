@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.intergrarh.banco_sangue.model.Candidato;
 import com.intergrarh.banco_sangue.service.CandidatoService;
+import com.intergrarh.banco_sangue.service.TipoSanguineoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class ProcessamentoController {
 
     @Autowired
     private CandidatoService candidatoService;
+    @Autowired
+    private TipoSanguineoService tipoSanguineoService;
 
     @PostMapping("/processarjson")
     public ResponseEntity<Map<String, Object>> processarJson(@RequestParam(required = false) String json, @RequestParam(required = false) MultipartFile jsonFile) throws IOException {
@@ -39,19 +42,13 @@ public class ProcessamentoController {
 
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode rootNode = objectMapper.readTree(jsonData);
-
             List<Candidato> candidatos = candidatoService.extrairCandidatos(rootNode);
 
             Map<String, Integer> candidatosPorEstado = candidatoService.calcularCandidatosPorEstado(candidatos);
-            System.out.println("Candidatos por estado: " + candidatosPorEstado);
             Map<String, Double> imcMedioPorFaixaEtaria = candidatoService.calcularImcMedioPorFaixaEtaria(candidatos);
-            System.out.println("IMC médio por faixa etária: " + imcMedioPorFaixaEtaria);
             Map<String, Double> percentualObesosPorSexo = candidatoService.calcularPercentualObesosPorSexo(candidatos);
-            System.out.println("Percentual obesos por sexo: " + percentualObesosPorSexo);
-            Map<String, Double> mediaIdadePorTipoSanguineo = candidatoService.calcularMediaIdadePorTipoSanguineo(candidatos);
-            System.out.println("Media idade por tipo sanguineo: " + mediaIdadePorTipoSanguineo);
-            Map<String, Integer> doadoresPorTipoSanguineo = candidatoService.calcularDoadoresPorTipoSanguineo(candidatos);
-            System.out.println("Doadores por tipo sanguineo: " + doadoresPorTipoSanguineo);
+            Map<String, Integer> mediaIdadePorTipoSanguineo = candidatoService.calcularMediaIdadePorTipoSanguineo(candidatos);
+            Map<String, Integer> doadoresPorTipoSanguineo = candidatoService.calcularDoadoresPorTipoSanguineo(candidatos, tipoSanguineoService.findAll());
 
             Map<String, Object> jsonResultado = new LinkedHashMap<>();
             jsonResultado.put("candidatosPorEstado", candidatosPorEstado);
