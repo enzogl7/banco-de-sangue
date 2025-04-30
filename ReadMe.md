@@ -45,18 +45,18 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 ---
 ### ℹ️ Passo a passo
 #### 🔽 1. Definir variáveis de ambiente (substitua por suas respectivas credenciais/nomes)
-🐧 Linux:
+🐧 Linux/macOS:
 ```
-export URL_BANCO=jdbc:postgresql://localhost:5432/banco_sangue
-export USER_BANCO=postgres
-export SENHA_BANCO=senha
+export URL_BANCO=jdbc:postgresql://localhost:5432/nomeseubanco
+export USER_BANCO=seu-user
+export SENHA_BANCO=sua-senha
 export SPRING_PROFILE_ACTIVE=dev
 ```
-🪟 Windows:
+🪟 Windows (PowerShell):
 ```
-$env:URL_BANCO = "jdbc:postgresql://localhost:5432/banco_sangue"
-$env:USER_BANCO = "postgres"
-$env:SENHA_BANCO = "123"
+$env:URL_BANCO = "jdbc:postgresql://localhost:5432/nomeseubanco"
+$env:USER_BANCO = "seu-user"
+$env:SENHA_BANCO = "sua-senha"
 $env:SPRING_PROFILE_ACTIVE = "dev"
 ```
 ---
