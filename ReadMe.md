@@ -35,13 +35,37 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 - Maven
 - Git
 - PostgreSQL
-### ℹ️ Passo a passo (Opção 1)
-#### 🔽 Clonar o repositório
+### ⚙️ Variáveis de Ambiente
+| Variável              | Descrição                              | Valor padrão             | Exemplo                          |
+|-----------------------|------------------------------------------|---------------------------|----------------------------------|
+| `URL_BANCO`           | URL de conexão com o PostgreSQL         | `jdbc:postgresql://localhost:5432/banco_sangue` | `jdbc:postgresql://localhost:5432/teste` |
+| `USER_BANCO`          | Usuário do banco                        | `postgres`                | `admin`                          |
+| `SENHA_BANCO`         | Senha do banco                          | `123`                     | `suaSenhaSegura`                |
+| `SPRING_PROFILE_ACTIVE` | Perfil ativo do Spring (`dev`, `prod`) | `dev`                     | `prod`                           |
+---
+### ℹ️ Passo a passo
+#### 🔽 1. Definir variáveis de ambiente (substitua por suas respectivas credenciais/nomes)
+🐧 Linux:
+```
+export URL_BANCO=jdbc:postgresql://localhost:5432/banco_sangue
+export USER_BANCO=postgres
+export SENHA_BANCO=senha
+export SPRING_PROFILE_ACTIVE=dev
+```
+🪟 Windows:
+```
+$env:URL_BANCO = "jdbc:postgresql://localhost:5432/banco_sangue"
+$env:USER_BANCO = "postgres"
+$env:SENHA_BANCO = "123"
+$env:SPRING_PROFILE_ACTIVE = "dev"
+```
+---
+#### 🔽 2. Clonar o repositório
 ```
 git clone https://github.com/enzogl7/banco-de-sangue.git
 cd banco-de-sangue
 ```
-#### 🔽 Rodar a aplicação
+#### 🔽 3. Rodar a aplicação
 ```./mvnw spring-boot:run```
 
 *A aplicação estará disponível em: localhost:8080/home
