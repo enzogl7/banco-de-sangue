@@ -1,0 +1,1 @@
+CREATE TABLE tipos_sanguineos (id SERIAL PRIMARY KEY, tipo VARCHAR(3) NOT NULL);

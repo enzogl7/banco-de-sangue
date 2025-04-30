@@ -9,7 +9,6 @@ import lombok.Setter;
 import java.util.Set;
 
 @Entity(name = "tipos_sanguineos")
-@Table(name = "tipos_sanguineos")
 @Getter
 @Setter
 @AllArgsConstructor
