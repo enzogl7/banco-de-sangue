@@ -29,6 +29,13 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 - Thymeleaf (uso de fragments para importação de scripts e links css)
 
 ---
+## Acesso ao Projeto
+
+O projeto está hospedado no Render e pode ser acessado através do seguinte link:
+
+[https://banco-de-sangue.onrender.com/home](https://banco-de-sangue.onrender.com/home)
+
+---
 ## 💡 Como rodar o projeto localmente?
 ### ✅ Pré-requisitos
 - Java JDK 17+
