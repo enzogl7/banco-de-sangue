@@ -26,6 +26,10 @@ $('#btnVoltarTopo').click(function() {
     return false;
 });
 
+// VARIAVEIS
+let grafico;
+let estaVisivel = false;
+
 // FUNCOES
 function habilitarInputs() {
     var jsonInput = document.getElementById("jsonInput");
@@ -100,57 +104,61 @@ function enviarJson() {
 function montarGraficoCandidatosEstado(dados) {
     const estados = Object.keys(dados);
     const valores = Object.values(dados);
+    const estadosComQuantidade = estados.map((estado, i) => `${estado}: ${valores[i]}`);
+
     const ctx = document.getElementById('graficoCandidatosEstado').getContext('2d');
 
-    new Chart(ctx, {
+    grafico = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: estados,
+            labels: estadosComQuantidade,
             datasets: [{
                 label: 'Número de Candidatos',
                 data: valores,
-                backgroundColor: ["#4FD1C5", "#2C7A7B", "#81E6D9", "#319795", "#38B2AC",
+                backgroundColor: [
+                    "#4FD1C5", "#2C7A7B", "#81E6D9", "#319795", "#38B2AC",
                     "#63B3ED", "#3182CE", "#2B6CB0", "#4299E1", "#4A5568",
                     "#718096", "#A0AEC0", "#E53E3E", "#F56565", "#C53030",
                     "#ED8936", "#DD6B20", "#F6AD55", "#D69E2E", "#ECC94B",
                     "#48BB78", "#38A169", "#276749", "#68D391", "#9F7AEA",
-                    "#805AD5", "#B794F4"],
-                borderRadius: 6,
-                barThickness: 24
+                    "#805AD5", "#B794F4"
+                ],
+                borderRadius: 6
             }]
         },
         options: {
             responsive: true,
             title: {
-                display: true,
-                text: 'Quantidade de candidatos em cada estado do Brasil'
+                display: false,
             }
         }
     });
 }
 
 function montarGraficoPercentualObesosPorSexo(dados) {
-    const sexo = Object.keys(dados);
-    const valores = Object.values(dados);
     const ctx = document.getElementById('graficoObesidadeSexo').getContext('2d');
+    const cores = {Masculino: '#1F8A70', Feminino: '#414f55'};
+    const datasets = Object.keys(dados).map(sexo => ({
+        label: sexo,
+        data: [dados[sexo]],
+        backgroundColor: cores[sexo],
+        borderRadius: 6,
+        barThickness: 24
+    }));
 
     new Chart(ctx, {
-        type: 'pie',
+        type: 'bar',
         data: {
-            labels: sexo,
-            datasets: [{
-                label: 'Porcentagem',
-                data: valores,
-                backgroundColor: ["#1F8A70", "#414f55"],
-                borderRadius: 6,
-                barThickness: 24
-            }]
+            labels: ['Obesidade (%)'],
+            datasets: datasets
         },
         options: {
+            indexAxis: 'y',
             responsive: true,
-            title: {
-                display: true,
-                text: 'Percentual de obesos entre homens e mulheres'
+            plugins: {
+                title: {
+                    display: false,
+                },
             }
         }
     });
@@ -175,8 +183,7 @@ function montarGraficoImcMedioPorFaixaEtaria(dados) {
         },
         options: {
             title: {
-                display: true,
-                text: 'IMC médio por faixa etária'
+                display: false,
             }
         }
     });
@@ -201,8 +208,7 @@ function montarGraficoMediaIdadePorTipoSanguineo(dados) {
         },
         options: {
             title: {
-                display: true,
-                text: 'Média de idade por tipo sanguíneo'
+                display: false,
             }
         }
     });
@@ -226,12 +232,24 @@ function montarGraficoQtdeDoadoresPorTipoSanguineo(dados) {
             }]
         },
         options: {
-            title: {
-                display: true,
-                text: 'Quantidade de doadores por tipo sanguíneo'
+            plugins: {
+                title: {
+                    display: false,
+                }
             }
-        }
+        },
     });
 }
 
+function alternarLegendas() {
+    const datasetIndex = 0;
+    const meta = grafico.getDatasetMeta(datasetIndex);
 
+    meta.data.forEach((elemento, i) => {
+        grafico.toggleDataVisibility(i);
+    });
+    grafico.update();
+
+    estaVisivel = !estaVisivel;
+    document.getElementById('toggleVisibilidadeBtn').textContent = estaVisivel ? 'Exibir todos' : 'Ocultar todos';
+}
