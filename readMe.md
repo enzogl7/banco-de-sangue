@@ -29,6 +29,15 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 - Thymeleaf (uso de fragments para importação de scripts e links css)
 
 ---
+## Acesso ao Projeto
+
+O projeto está hospedado no Render e pode ser acessado através do seguinte link:
+
+[https://banco-de-sangue.onrender.com/home](https://banco-de-sangue.onrender.com/home)
+
+*OBS.: Por estar hospedado em um servidor gratuito do Render, a aplicação pode apresentar um pouco de lentidão e/ou loading ao entrar no link, mas basta aguardar alguns segundos ;).
+
+---
 ## 💡 Como rodar o projeto localmente?
 ### ✅ Pré-requisitos
 - Java JDK 17+
@@ -46,6 +55,13 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 #### 🔽 1. Criar a database no Postgres
 Certifique-se de criar uma database no PgAdmin com o nome de sua preferência antes de tentar subir o projeto.
 
+- Instale o PostgreSQL - https://www.postgresql.org/download/
+- No menu iniciar, procure por PgAdmin
+- Clique em servers > botão direito em PostgreSQL > Create > Database
+- Crie a database com seu nome de preferência
+
+*Certifique de lembrar-se do nome de usuário e senha cadastrados no usuário do PostgreSQL na instalação, será necessário declarar nas variáveis de ambiente
+
 ---
 #### 🔽 2. Definir variáveis de ambiente (substitua por suas respectivas credenciais/nomes)
 🪟 Windows PowerShell:
@@ -55,17 +71,17 @@ Certifique-se de criar uma database no PgAdmin com o nome de sua preferência an
 [Environment]::SetEnvironmentVariable("SENHA_BANCO", "senha-postgres", "User")
 ```
 ---
-#### 🔽 3. Clonar o repositório
+#### 🔽 3. Clonar o repositório e rodar a aplicação
+💻 CMD:
 ```
 git clone https://github.com/enzogl7/banco-de-sangue.git
 cd banco-de-sangue
+mvn spring-boot:run
 ```
----
-#### 🔽 4. Rodar a aplicação
-```mvn spring-boot:run```
 
 ##### *A aplicação estará disponível em: localhost:8080/home
+##### *Caso enfrente problemas para subir o projeto, a aplicação está disponível em: [https://banco-de-sangue.onrender.com/home](https://banco-de-sangue.onrender.com/home)
 
 ---
-###### enzolima527@gmail.com
+##### ✉️ enzolima527@gmail.com
 
