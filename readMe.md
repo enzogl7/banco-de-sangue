@@ -38,6 +38,14 @@ O projeto está hospedado no Render e pode ser acessado através do seguinte lin
 *OBS.: Por estar hospedado em um servidor gratuito do Render, a aplicação pode apresentar um pouco de lentidão e/ou loading ao entrar no link, mas basta aguardar alguns segundos ;).
 
 ---
+---
+## 📥 Download do Arquivo JSON
+
+Você pode baixar o arquivo de dados JSON utilizado no projeto diretamente pelo link abaixo:
+
+[📄 Clique aqui para baixar o arquivo `dados.json`](https://github.com/enzogl7/banco-de-sangue/raw/main/dados.json)
+
+---
 ## 💡 Como rodar o projeto localmente?
 ### ✅ Pré-requisitos
 - Java JDK 17+
