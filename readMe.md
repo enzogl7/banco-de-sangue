@@ -27,17 +27,8 @@ Aplicação web desenvolvida com o objetivo de consumir um JSON e extrair dele o
 - Chart.js (gráficos)
 - SweetAlert2 (alertas)
 - Thymeleaf (uso de fragments para importação de scripts e links css)
-
 ---
-## Acesso ao Projeto
 
-O projeto está hospedado no Render e pode ser acessado através do seguinte link:
-
-[https://banco-de-sangue.onrender.com/home](https://banco-de-sangue.onrender.com/home)
-
-*OBS.: Por estar hospedado em um servidor gratuito do Render, a aplicação pode apresentar um pouco de lentidão e/ou loading ao entrar no link, mas basta aguardar alguns segundos ;).
-
----
 ## 📥 Download do Arquivo JSON
 
 Você pode baixar o arquivo de dados JSON utilizado no projeto diretamente pelo link abaixo:
@@ -87,7 +78,6 @@ mvn spring-boot:run
 ```
 
 ##### *A aplicação estará disponível em: localhost:8080/home
-##### *Caso enfrente problemas para subir o projeto, a aplicação está disponível em: [https://banco-de-sangue.onrender.com/home](https://banco-de-sangue.onrender.com/home)
 
 ---
 ##### ✉️ enzolima527@gmail.com
